@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 class GroupsController extends Controller
 {
     public function index(){
-        $groups = UserGroup::where('user_id', auth()->id())->get();
-        // dd($groups);
-        return view('groups.index',compact('groups'));
+        $userGroups = UserGroup::where('user_id', auth()->id())->with('groups')->get();
+        return view('groups.index',compact('userGroups'));
     }
 }
