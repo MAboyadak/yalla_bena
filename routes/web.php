@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\FreindsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('groups', GroupsController::class);
+
+Route::resource('friends', FreindsController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
