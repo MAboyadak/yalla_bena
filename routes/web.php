@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::resource('groups', GroupsController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
