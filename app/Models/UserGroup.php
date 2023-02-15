@@ -11,11 +11,11 @@ class UserGroup extends Model
 {
     use HasFactory;
 
-    public function groups(){
-        return $this->hasMany(Group::class,'id');
-    }
+    // public function groups(){
+    //     return $this->hasMany(Group::class,'id');
+    // }
 
-    public function users(){
-        return $this->hasMany(User::class,'id');
-    }
+    // public function users(){
+    //     return $this->hasMany(User::class,'id');
+    // }
 }
