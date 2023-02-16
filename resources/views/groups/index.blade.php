@@ -11,8 +11,8 @@
     <p>Groups</p>
     <div class="row my-3 justify-content-around">
         <p class="col-2">Groups</p>
-        <input type="text" name="" id="" class="col-5">
-        <input type="button" value="Add" class="col-2">
+        <input type="text" name="" id="" class="col-5 form-control w-50">
+        <input type="button" value="Add" class="col-2 btn btn-primary">
     </div>
 
     <div class="row">
@@ -41,8 +41,8 @@
         <div class="col-8 border">
             <div class="row my-3 justify-content-around">
                 <p class="col-2">Groups</p>
-                <input type="text" name="" id="" class="col-5">
-                <input type="button" value="Add" class="col-2">
+                <input type="text" name="" id="" class="col-5 form-control w-50">
+                <input type="button" value="Add" class="col-2 btn btn-primary">
             </div>
             <div class="row my-3 justify-content-around">
                 <p class="col-2">Groups</p>
