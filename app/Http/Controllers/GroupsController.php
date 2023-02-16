@@ -26,6 +26,8 @@ class GroupsController extends Controller
     public function destroy(Group $group)
     {
         //
+        // $id=$group->group_id;
+        // DB::table('groups')->delete($id);
         $group->delete();
         return to_route("groups.index");
     }

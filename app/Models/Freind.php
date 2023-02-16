@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Freind extends Model
 {
     use HasFactory;
+    protected $fillable=["email"];
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

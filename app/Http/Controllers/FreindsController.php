@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Freind;
+use App\Models\User;
 use App\Http\Requests\StoreFreindsRequest;
 use App\Http\Requests\UpdateFreindsRequest;
 use Illuminate\Http\RedirectResponse;
@@ -11,9 +12,16 @@ use Illuminate\Http\Response;
 class FreindsController extends Controller
 {
     public function index(){
-        // $userGroups = UserGroup::where('user_id', auth()->id())->with('groups')->get();
-       // $user = User::find(auth()->id());
-        return view('friends.index');
+
+        $user = User::find(auth()->id());
+        return view('friends.index',compact('user'));
+    }
+
+    public function store(StoreFreindsRequest $request){
+        $freind=Freind::create($request->all());
+
+        DB::table('friend_user')->insert(['user_id' => auth()->id(),'email' => $freind->email]);
+        return to_route('friends.index' );
     }
         /**
      * Display a listing of the resource.

@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Group;
 use App\Models\UserGroup;
+use App\Models\Freind;
+
 
 class User extends Authenticatable
 {
@@ -46,6 +48,10 @@ class User extends Authenticatable
 
     public function groups(){
         return $this->belongsToMany(Group::class);
+    }
+
+    public function friends(){
+        return $this->belongsToMany(Freind::class);
     }
 
     // public function user_groups(){
