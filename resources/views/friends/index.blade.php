@@ -8,6 +8,7 @@
         <div class="form-group mb-2 d-inline">
             <label for="validationCustom02" class="form-label">Your friend email</label>
             <input  id="validationCustom02" class="form-control w-50" name="email" type="email" required />
+            
 </div>
 <div class="form-group d-inline">
     <input id="submit" class="form-control bg-primary btn w-25 fs-3" type="submit"  value="add" />
