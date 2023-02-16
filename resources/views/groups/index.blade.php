@@ -2,14 +2,11 @@
 
 @section('content')
 <div class="container">
-    <p class="h1">Groups</p>
-    <div class="row pt-5 justify-content-center">
-        <p class="col-1">Groups</p>
-        <form action="{{route('groups.store')}}" method="POST" class="col-8  justify-content-btween">
-            @csrf
-            <input type="text" name="name" id="" class="col-7">
-            <input type="submit" value="Add" name=""  class="col-2 btn btn-success">
-        </form>
+    <p>Groups</p>
+    <div class="row my-3 justify-content-around">
+        <p class="col-2">Groups</p>
+        <input type="text" name="" id="" class="col-5">
+        <input type="button" value="Add" class="col-2">
     </div>
 
     <div class="row py-5 justify-content-center">
@@ -31,8 +28,9 @@
             <div class="row my-3 justify-content-around">
                 <p class="col-2">Groups</p>
                 <input type="text" name="" id="" class="col-5">
-                <input type="button" value="Add" class="col-2 btn btn-success">
+                <input type="button" value="Add" class="col-2">
             </div>
+
             <div class="row my-3 justify-content-around">
                 <p class="col-2">Groups</p>
                 <p class="col-2">Groups</p>
