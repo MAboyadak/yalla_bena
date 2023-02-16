@@ -21,7 +21,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    <h2>Yalla Notlob</h2>
                 </a>
 
                 <a class="nav-link mx-5" href="{{route('home')}}">Home</a>
