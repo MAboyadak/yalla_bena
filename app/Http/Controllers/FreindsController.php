@@ -13,10 +13,9 @@ class FreindsController extends Controller
     public function index(){
         // $userGroups = UserGroup::where('user_id', auth()->id())->with('groups')->get();
        // $user = User::find(auth()->id());
-        return view('friends.friends');
+        return view('friends.index');
     }
-
-    /**
+        /**
      * Display a listing of the resource.
      */
 //     public function index(): Response
