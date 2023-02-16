@@ -7,7 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+        {{-- {{ config('app.name', 'Laravel') }} --}}
+        Yalla Notlob
+    
+    </title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -26,9 +30,9 @@
                 </a>
 
                 <a class="nav-link mx-5" href="{{route('home')}}">Home</a>
-                <a class="nav-link" href="{{route('friends.index')}}">Friends</a>
-                <a class="nav-link" href="{{route('groups.index')}}">Groups</a>
-                <a class="nav-link" href="#">Orders</a>
+                <a class="nav-link mx-5" href="{{route('friends.index')}}">Friends</a>
+                <a class="nav-link mx-5" href="{{route('groups.index')}}">Groups</a>
+                <a class="nav-link mx-5" href="#">Orders</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
