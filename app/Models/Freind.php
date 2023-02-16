@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Freind extends Model
 {
     use HasFactory;
-    protected $fillable=["email"];
-    public function users(){
-        return $this->belongsToMany(User::class);
-    }
+    protected $table="friend_user";
+    protected $fillable=["email","user_id"];
+
+    // public function users(){
+    //     return $this->belongsToMany(User::class);
+    // }
 }

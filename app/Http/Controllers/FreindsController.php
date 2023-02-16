@@ -8,20 +8,22 @@ use App\Http\Requests\StoreFreindsRequest;
 use App\Http\Requests\UpdateFreindsRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+
 
 class FreindsController extends Controller
 {
     public function index(){
-
+        $friends=Freind::where('user_id',auth()->id())->get();
+        // dd($friends);
         $user = User::find(auth()->id());
-        return view('friends.index',compact('user'));
+        return view('friends.index',compact('user','friends'));
     }
 
     public function store(StoreFreindsRequest $request){
         $freind=Freind::create($request->all());
-
         DB::table('friend_user')->insert(['user_id' => auth()->id(),'email' => $freind->email]);
-        return to_route('friends.index' );
+        return to_route('friends.index');
     }
         /**
      * Display a listing of the resource.
