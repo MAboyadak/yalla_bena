@@ -64,6 +64,12 @@
                                 @endif
                             </div>
                         </div>
+                        <div class='form-group row mt-4'>
+                            <div class='offset-md-3'>
+                                <a href="{{route('login.facebook')}}" class="btn btn-primary">{{ __('Login With Facebook') }}</a>
+                                <a href="{{route('login.google')}}" class="btn btn-danger">{{ __('Login With Google') }}</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
