@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\FreindsController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -25,6 +26,8 @@ Auth::routes();
 Route::resource('groups', GroupsController::class);
 
 Route::resource('friends', FreindsController::class);
+
+Route::resource('orders', OrderController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
