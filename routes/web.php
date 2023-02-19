@@ -41,36 +41,40 @@ Route::get('/google/auth/redirect', function () {
 
 Route::get('/auth/callback', function () {
     $googleUser = Socialite::driver('google')->stateless()->user();
-    // dd($googleUser->email);
-    //$user = User::where('email', $googleUser->email)->first();
-
     $user = User::updateOrCreate([
         'google_id' => $googleUser->id,
     ], [
         'name' => $googleUser->name,
         'email' => $googleUser->email,
         'remember_token' => $googleUser->token,
-        // 'github_refresh_token' => $googleUser->refreshToken,
         'password'=>'',
         'google_id'=>$googleUser->id
 
     ]);
-    // dd($user);
         Auth::login($user);
         return redirect('/home');
-
-    // $user->token
 });
 
 
 //login with facebook
-Route::get('/facebook/auth/redirect', function () {
-    return Socialite::driver('facebook')->redirect();
+Route::get('auth/facebook/redirect', function () {
+    return Socialite::driver('facebook')->stateless()->redirect();
 })->name('login.facebook');
 
-Route::get('/facebook/auth/callback', function () {
-    $user = Socialite::driver('facebook')->user();
-    dd($user);
+Route::get('/auth/facebook/callback', function () {
+    $facebookUser = Socialite::driver('facebook')->stateless()->user();
+    // dd($facebookUser);
+    $user = User::updateOrCreate([
+        'facebook_id' => $facebookUser->id,
+    ], [
+        'name' => $facebookUser->name,
+        'email' => $facebookUser->email,
+        'remember_token' => $facebookUser->token,
+        'password'=>'',
+        'google_id'=>$facebookUser->id
 
+    ]);
+        Auth::login($user);
+        return redirect('/home');
     // $user->token
 });
