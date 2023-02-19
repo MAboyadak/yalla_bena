@@ -17,6 +17,9 @@ class GroupsController extends Controller
     }
 
     public function store(StoreGroupsRequest $request){
+        $request->validate([
+         'name'=>'required'
+        ]);
         $group=Group::create($request->all());
 
         DB::table('group_user')->insert(['user_id' => auth()->id(),'group_id' => $group->id]);

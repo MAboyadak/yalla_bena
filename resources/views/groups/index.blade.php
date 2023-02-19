@@ -7,8 +7,16 @@
         <p class="col-1">Groups</p>
         <form action="{{route('groups.store')}}" method="POST" class="col-8  justify-content-btween">
             @csrf
-            <input type="text" name="name" id="" class="col-7">
+            <input type="text" name="name" id="" class="col-7 form-control my-2">
+            @if($errors->has('name'))
+            <div class="alert alert-danger">
+             <ul>
+              <li>{{$errors->first('name')}}</li>
+             </ul>
+            </div>
+            @endif
             <input type="submit" value="Add" name=""  class="col-2 btn btn-success">
+
         </form>
     </div>
 

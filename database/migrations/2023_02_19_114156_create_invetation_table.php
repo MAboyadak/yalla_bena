@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('invetation', function (Blueprint $table) {
             $table->id();
+            $table->enum('meal',['breakfast','lunch','dinner']);
+            $table->string('restaurant_name');
+            $table->string('receiver_email');
+            $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('invetation');
     }
 };

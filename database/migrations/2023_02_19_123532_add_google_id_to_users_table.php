@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->text('google_id')->nullable();
-            $table->text('password')->nullable();
-            $table->text('remember_token')->nullable();
+
+            // $table->text('password')->default(0)->change();
+            $table->text('remember_token')->nullable()->change();
         });
     }
 
@@ -26,8 +27,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('google_id');
-            $table->dropColumn('remember_token');
+            // $table->dropColumn('google_id');
+            // $table->dropColumn('remember_token');
         });
     }
 };
