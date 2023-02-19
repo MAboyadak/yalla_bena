@@ -41,24 +41,24 @@ Route::get('/google/auth/redirect', function () {
 
 Route::get('/auth/callback', function () {
     $googleUser = Socialite::driver('google')->stateless()->user();
-    $user = User::where('email', $googleUser->email)->first();
-    // dd($googleUser);
-    if($user){
-        $user->google_id = $googleUser->id;
-        $user->google_token = $googleUser->token;
-        $user->update();
+    // dd($googleUser->email);
+    //$user = User::where('email', $googleUser->email)->first();
 
-    }else {
-        $user = User::create([
-            'name'=>$googleUser->name ? $googleUser->name : $googleUser->email,
-            "email"=>$googleUser->email,
-            'github_id'=>$googleUser->id,
-            'github_token'=>$googleUser->token,
-            'github_refresh_token'=>$googleUser->refreshToken ? $googleUser->refreshToken:null
-        ]);
-    }
-            Auth::login($user);
-            return redirect('/home');
+    $user = User::updateOrCreate([
+        'google_id' => $googleUser->id,
+    ], [
+        'name' => $googleUser->name,
+        'email' => $googleUser->email,
+        'remember_token' => $googleUser->token,
+        // 'github_refresh_token' => $googleUser->refreshToken,
+        'password'=>'',
+        'google_id'=>$googleUser->id
+
+    ]);
+    // dd($user);
+        Auth::login($user);
+        return redirect('/home');
+
     // $user->token
 });
 
