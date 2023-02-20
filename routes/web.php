@@ -64,16 +64,30 @@ Route::get('auth/facebook/redirect', function () {
 Route::get('/auth/facebook/callback', function () {
     $facebookUser = Socialite::driver('facebook')->stateless()->user();
     // dd($facebookUser);
-    $user = User::updateOrCreate([
-        'facebook_id' => $facebookUser->id,
-    ], [
-        'name' => $facebookUser->name,
-        'email' => $facebookUser->email,
-        'remember_token' => $facebookUser->token,
-        'password'=>'',
-        'google_id'=>$facebookUser->id
+    // $user = User::updateOrCreate([
+    //     'facebook_id' => $facebookUser->id,
+    // ], [
+    //     'name' => $facebookUser->name,
+    //     'email' => $facebookUser->email,
+    //     'remember_token' => $facebookUser->token,
+    //     'password'=>'',
+    //     'facebook_id'=>$facebookUser->id
 
-    ]);
+    // ]);
+    $user=User::where('email' , '=' , $facebookUser->email)->first();
+    if($user){
+        $user->facebook_id =$facebookUser->id;
+        $user->remember_token = $facebookUser->token;
+        $user->update();
+
+    }else {
+        $user = User::create([
+            'name'=>$facebookUser->name ? $facebookUser->name : $facebookUser->email,
+            "email"=>$facebookUser->email,
+            'facebook_id'=>$facebookUser->id,
+            'remember_token'=>$facebookUser->token,
+        ]);
+    }
         Auth::login($user);
         return redirect('/home');
     // $user->token
