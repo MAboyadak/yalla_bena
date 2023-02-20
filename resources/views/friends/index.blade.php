@@ -16,7 +16,7 @@
     <!-- {{dd($friends)}} -->
     @foreach($friends as $friend)
     <p>ssssssssss</p>
-    {{dd(auth()->user())}}
+    {{dd(auth()->user())}} 
     <!-- <p>{{$friend->email}}</p> -->
     @endforeach
 </div>
