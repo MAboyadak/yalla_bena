@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\FreindsController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,28 +29,52 @@ Route::resource('groups', GroupsController::class);
 
 Route::resource('friends', FreindsController::class);
 
+Route::resource('orders', OrderController::class);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //login with google
 Route::get('/google/auth/redirect', function () {
-    return Socialite::driver('google')->redirect();
+    return Socialite::driver('google')->stateless()->redirect();
 })->name('login.google');
 
-Route::get('/google/auth/callback', function () {
-    $user = Socialite::driver('google')->user();
+Route::get('/auth/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+    $user = User::updateOrCreate([
+        'google_id' => $googleUser->id,
+    ], [
+        'name' => $googleUser->name,
+        'email' => $googleUser->email,
+        'remember_token' => $googleUser->token,
+        'password'=>'',
+        'google_id'=>$googleUser->id
 
-    // $user->token
+    ]);
+        Auth::login($user);
+        return redirect('/home');
 });
 
 
 //login with facebook
-Route::get('/facebook/auth/redirect', function () {
-    return Socialite::driver('facebook')->redirect();
+Route::get('auth/facebook/redirect', function () {
+    return Socialite::driver('facebook')->stateless()->redirect();
 })->name('login.facebook');
 
-Route::get('/facebook/auth/callback', function () {
-    $user = Socialite::driver('facebook')->user();
+Route::get('/auth/facebook/callback', function () {
+    $facebookUser = Socialite::driver('facebook')->stateless()->user();
+    // dd($facebookUser);
+    $user = User::updateOrCreate([
+        'facebook_id' => $facebookUser->id,
+    ], [
+        'name' => $facebookUser->name,
+        'email' => $facebookUser->email,
+        'remember_token' => $facebookUser->token,
+        'password'=>'',
+        'google_id'=>$facebookUser->id
 
+    ]);
+        Auth::login($user);
+        return redirect('/home');
     // $user->token
 });

@@ -11,10 +11,11 @@ use App\Models\Group;
 use App\Models\UserGroup;
 use App\Models\Freind;
 
-
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'remember_token',
+        'google_id',
+        'facebook_id'
     ];
 
     /**
@@ -46,11 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function groups(){
+    public function groups()
+    {
         return $this->belongsToMany(Group::class);
     }
 
-    public function friends(){
+    public function friends()
+    {
         return $this->hasMany(Freind::class);
     }
 
