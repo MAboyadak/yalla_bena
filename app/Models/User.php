@@ -64,6 +64,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Freind_order::class);
     }
+    public function group_friend()
+    {
+        return $this->hasMany(Group_Friend::class);
+    }
+
 
     // public function user_groups(){
     //     return $this->belongsToMany(UserGroup::class);

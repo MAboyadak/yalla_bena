@@ -15,6 +15,12 @@ class Group extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function group_friend()
+    {
+        return $this->belongsToMany(Group_Friend::class);
+    }
+
+
     // public function user_groups(){
     //     return $this->belongsToMany(UserGroup::class);
     // }

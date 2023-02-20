@@ -43,9 +43,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" class="col-8  justify-content-btween">
+                    <form action="{{route('groups.store1')}}" method="POST" class="col-8  justify-content-btween">
                         @csrf
-                        <input type="email" name="name" id="" class="col-7 form-control ">
+                        <select name="friends" id=""  class="form-select" aria-label="Default select example">
+                            @foreach($friends as $friend)
+                              <option value="{{$friend->id}}">{{$friend->email}}</option>
+                            @endforeach
+                          </select>
                         <div class="modal-footer">
                             <input type="hidden" name="user_id" value="{{auth()->id()}}">
                             <input type="submit" value="Add" name="" data-bs-dismiss="modal" class="col-2 btn btn-success text-item-center">
