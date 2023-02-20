@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Friend_order;
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\StoreFreind_orderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -16,7 +20,8 @@ class OrderController extends Controller
     public function index()
     {
         //
-        return view('orders.index');
+        $friends =DB::table('friend_user')->where('user_id',auth()->id())->get();
+        return view('orders.index',compact('friends'));
     }
 
     /**
@@ -30,9 +35,35 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderRequest $request): RedirectResponse
+    public function store(StoreOrderRequest $request)
     {
         //
+        $request->validate([
+
+            'order_for'=>'required',
+            'restaurant_name'=>'required',
+            ]);
+
+
+            $logged_in_user =Auth::user()->id;
+            $data = $request->all();
+            $data['user_id']=$logged_in_user;
+
+            $order =Order::create($data);
+            $myFriend =new Friend_order();
+            $myFriend->order_id=$order->id;
+            $myFriend->friends=$request->friends;
+            $myFriend->save();
+
+
+
+        //  $data = $request->all();
+        //  DB::table('orders')->insert(['user_id' => auth()->id(),'order_for' =>
+        //  $data->order_for,'restaurant_name'=>$data->restaurant_name,'menu_image'=>$data->menu_image]);
+
+        //   DB::table('friend_order')->insert(['user_id'=>auth()->id(),'friends'=>$data->friends]);
+          return 'added';
+        // // to_route('orders.index');
     }
 
     /**
