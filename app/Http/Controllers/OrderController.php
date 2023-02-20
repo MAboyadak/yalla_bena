@@ -21,7 +21,9 @@ class OrderController extends Controller
     {
         //
         $friends =DB::table('friend_user')->where('user_id',auth()->id())->get();
-        return view('orders.index',compact('friends'));
+        $friends_order =DB::table('friend_order')->where('user_id',auth()->id())->get();
+
+        return view('orders.index',compact('friends','friends_order'));
     }
 
     /**
@@ -42,6 +44,7 @@ class OrderController extends Controller
 
             'order_for'=>'required',
             'restaurant_name'=>'required',
+            'menu_image'=>'required|image|mimes:png,jpg'
             ]);
 
 
@@ -62,8 +65,8 @@ class OrderController extends Controller
         //  $data->order_for,'restaurant_name'=>$data->restaurant_name,'menu_image'=>$data->menu_image]);
 
         //   DB::table('friend_order')->insert(['user_id'=>auth()->id(),'friends'=>$data->friends]);
-          return 'added';
-        // // to_route('orders.index');
+        //   return 'added';
+      return  to_route('orders.index');
     }
 
     /**

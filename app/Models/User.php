@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Group;
 use App\Models\UserGroup;
 use App\Models\Freind;
+use App\Models\Freind_order;
 
 class User extends Authenticatable
 {
@@ -58,6 +59,10 @@ class User extends Authenticatable
     public function friends()
     {
         return $this->hasMany(Freind::class);
+    }
+    public function friends_order()
+    {
+        return $this->hasMany(Freind_order::class);
     }
 
     // public function user_groups(){
