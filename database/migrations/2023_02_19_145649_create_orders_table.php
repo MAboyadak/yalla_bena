@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->enum('order_for',['breakfast','lunch','dinner']);
             $table->string('restaurant_name');
-            $table->string('menu_image');
+            $table->string('menu_image')->default('');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
