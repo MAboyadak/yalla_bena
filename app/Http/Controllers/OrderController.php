@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Friend_order;
 use App\Http\Requests\StoreOrderRequest;
@@ -20,10 +21,11 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $user = User::find(auth()->id());
         $friends =DB::table('friend_user')->where('user_id',auth()->id())->get();
         $friends_order =DB::table('friend_order')->where('user_id',auth()->id())->get();
 
-        return view('orders.index',compact('friends','friends_order'));
+        return view('orders.index',compact('user','friends','friends_order'));
     }
 
     /**

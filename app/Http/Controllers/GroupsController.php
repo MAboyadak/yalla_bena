@@ -22,6 +22,19 @@ class GroupsController extends Controller
         return view('groups.index',compact('user','friends','group_friend'));
     }
 
+    public function show($id){
+        $user = User::find(auth()->id());
+        $friends =DB::table('friend_user')->where('user_id',auth()->id())->get();
+        $group_friends = DB::table('group_friend')
+        ->join('groups', 'group_friend.group_id', '=', 'groups.id')
+        ->join('friend_user', 'group_friend.friend_id', '=', 'friend_user.id')
+        ->where('group_friend.group_id', $id)
+        ->select('friend_user.*')
+        ->get();
+
+        return view('groups.show' , compact('user' , 'friends' , 'group_friends'));
+    }
+
     public function store(StoreGroupsRequest $request){
         $request->validate([
          'name'=>'required',
@@ -59,9 +72,13 @@ class GroupsController extends Controller
 
     public function store1(StoreGroupFriendRequest $request){
 
-        $group_friend=Group_Friend::create($request->all());
-        DB::table('group_friend')->insert(['user_id' => auth()->id(),'group_id'=> $group_friend->id]);
-       
+        $group_friend=new Group_Friend();
+        $group_friend->user_id = auth()->id();
+        $group_friend->group_id = $request->group_id;
+        $group_friend->friend_id = $request->friends;
+        $group_friend->save();
+        //DB::table('group_friend')->insert(['user_id' => auth()->id(),'group_id'=> $group_friend->id]);
+
         return "added";
     }
 }

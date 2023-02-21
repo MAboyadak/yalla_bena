@@ -61,6 +61,19 @@
         </div>
     </div>
 
+        <div class="col-7 border">
+            <div class="row my-3 justify-content-around">
+                <p class="col-3 h5">Friends Name</p>
+                <input type="text" name="" id="" class="col-5">
+                <input type="button" value="Add" class="col-2 btn btn-success">
+            </div>
+
+            <div class="row my-3 justify-content-around">
+                @foreach($group_friends as $friend)
+                <p class="col-2">{{$friend->email}}</p>
+                @endforeach
+            </div>
+        </div>
     </div>
 </div>
 <script>

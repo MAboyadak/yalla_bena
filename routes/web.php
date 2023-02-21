@@ -26,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::post('/groups/store1', [GroupsController::class, 'store1'])->name('groups.store1');
-
+route::get('group-friends/{id}', [GroupController::class,"show"])->name('group.show');
 Route::resource('groups', GroupsController::class);
 
 Route::resource('friends', FreindsController::class);
@@ -34,6 +34,8 @@ Route::resource('friends', FreindsController::class);
 Route::resource('orders', OrderController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 
 
